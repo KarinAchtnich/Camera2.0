@@ -1,3 +1,4 @@
 # Welcome to MyApp
 
-haha lol
+Plugins
+https://www.npmjs.com/package/cordova-plugin-camera
