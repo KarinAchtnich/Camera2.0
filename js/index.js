@@ -28,10 +28,12 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+
     },
 
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        /*
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -40,8 +42,26 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-        console.log('Test');
+        console.log('Test');*/
+
+        x
     }
+
+    
 };
 
+
 app.initialize();
+
+/*
+var firebase = require("firebase");
+var config = {
+    apiKey: "AIzaSyCQCKqVSKAeOgvDz-zQNiLQEhQCY1YDhbM",
+    authDomain: "camera2-21e00.firebaseapp.com",
+    databaseURL: "https://camera2-21e00.firebaseio.com",
+    projectId: "camera2-21e00",
+    storageBucket: "camera2-21e00.appspot.com",
+    messagingSenderId: "359640106474"
+  };
+  firebase.initializeApp(config);
+*/
