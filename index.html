@@ -18,8 +18,9 @@
     under the License.
 -->
 <html>
-    <head>
-        <!--
+
+<head>
+    <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
         Some notes:
@@ -28,37 +29,69 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+    style-src * 'unsafe-inline'; 
+    media-src * 'unsafe-inline';
+    font-src * 'unsafe-inline';
+    script-src * 'unsafe-inline';
+    media-src * blob:;
+    img-src * data:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
-        <title>Hello World V3</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Oioioi</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Du bisch es Fudi</p>
-            </div>
-        </div>
-        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCQCKqVSKAeOgvDz-zQNiLQEhQCY1YDhbM",
-    authDomain: "camera2-21e00.firebaseapp.com",
-    databaseURL: "https://camera2-21e00.firebaseio.com",
-    projectId: "camera2-21e00",
-    storageBucket: "camera2-21e00.appspot.com",
-    messagingSenderId: "359640106474"
-  };
-  firebase.initializeApp(config);
-</script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+    <title>Hello World V3</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+</head>
+
+<body>
+
+        
+
+
+        <ons-page>
+                <ons-toolbar>
+                  <div class="center">Tab 1</div>
+                </ons-toolbar>
+              
+                <ons-tabbar swipeable position="auto">
+                  <ons-tab page="tab1.html" label="Tab 1" icon="ion-home, material:md-home" badge="7" active>
+                  </ons-tab>
+                  <ons-tab page="tab2.html" label="Tab 2" icon="md-settings" active-icon="md-face">
+                  </ons-tab>
+                </ons-tabbar>
+              </ons-page>
+              
+              <template id="tab1.html">
+                <ons-page id="Tab1">
+                  <p style="text-align: center;">
+                    This is the first page.
+                  </p>
+
+                  <ons-button>Default</ons-button>
+
+                </ons-page>
+              </template>
+              
+              <template id="tab2.html">
+                <ons-page id="Tab2">
+                  <p style="text-align: center;">
+                    This is the second page.
+                  </p>
+                </ons-page>
+              </template>
+    
+
+
+</body>
+
 </html>
