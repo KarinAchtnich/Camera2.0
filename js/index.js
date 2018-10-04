@@ -46,20 +46,7 @@ var app = {
         
         document.getElementById('button1').addEventListener('click',function(){
             //
-            function setOptions(srcType) {
-                var options = {
-                    // Some common settings are 20, 50, and 100
-                    quality: 50,
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    // In this app, dynamically set the picture source, Camera or photo gallery
-                    sourceType: srcType,
-                    encodingType: Camera.EncodingType.JPEG,
-                    mediaType: Camera.MediaType.PICTURE,
-                    allowEdit: true,
-                    correctOrientation: true  //Corrects Android orientation quirks
-                };
-                return options;
-            }
+            
             
 
             navigator.camera.getPicture(onSuccess, onFail, { quality: 25,
@@ -69,35 +56,14 @@ var app = {
             function onSuccess(imageData) {
                 var image = document.getElementById('myImage');
                 image.src = "data:image/jpeg;base64," + imageData;
+                // Speichern hier
             }
             
             function onFail(message) {
                 alert('Failed because: ' + message);
             }
 
-            function displayImage(imgUri) {
- 
-                var elem = document.getElementById('imageFile');
-                elem.src = imgUri;
-            }
-            function openCamera(selection) {
- 
-                var srcType = Camera.PictureSourceType.CAMERA;
-                var options = setOptions(srcType);
-                var func = createNewFileEntry;
-             
-                navigator.camera.getPicture(function cameraSuccess(imageUri) {
-             
-                    displayImage(imageUri);
-                    // Save
-                    func(imageUri);
-             
-                }, function cameraError(error) {
-                    console.debug("Unable to obtain picture: " + error, "app");
-             
-                }, options);
-            }
-                openCamera();
+            
             
         });
         
