@@ -87,3 +87,11 @@ var config = {
   };
   firebase.initializeApp(config);
 */
+
+var showPrompt = function() {
+    ons.notification.prompt('Geben Sie den Namen der Datei an:')
+      .then(function(input) {
+        var message = input ? 'Entered: ' + input : 'Entered nothing!';
+        ons.notification.alert(message);
+      });
+  };
