@@ -84,44 +84,63 @@
               
               <template id="tab2.html">
                 <ons-page id="Tab2">
-                  <p style="text-align: center;">
-                    This is the second page.
+                   <p style="text-align: right;">
+                    <ons-button onclick="showPrompt()">umbenennen</ons-button>
+                    <ons-button onclick="showPrompt()">löschen</ons-button>
                   </p>
-                     <ons-list-title>People I know</ons-list-title>
-<ons-list>
-  <ons-list-header>My friends</ons-list-header>
-  <ons-list-item>Alice</ons-list-item>
-  <ons-list-item>Bob</ons-list-item>
-  <ons-list-item>Eve</ons-list-item>
+                      <ons-list-title>Galerie</ons-list-title>
 
-  <ons-list-header>My enemies</ons-list-header>
-  <ons-list-item>Alice</ons-list-item>
-  <ons-list-item>Bob</ons-list-item>
-  <ons-list-item>Eve</ons-list-item>
-</ons-list>
 <ons-list-item>
     <div class="left">
       <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
     </div>
     <div class="center">
-      Icon and switch
+      Name/Datum
     </div>
     <div class="right">
       <ons-switch></ons-switch>
     </div>
-    <div class="expandable-content">
-      Expandable content
-    </div>
+    
   </ons-list-item>
-  <ons-list-header>Thumbnails and titles</ons-list-header>
-    <ons-list-item>
+  <ons-list-header>Bilder</ons-list-header>
+  <ons-list-item tappable>
       <div class="left">
         <img class="list-item__thumbnail" src="img/logo.png">
       </div>
       <div class="center">
-        <span class="list-item__title">Cutest kitty</span><span class="list-item__subtitle">On the Internet</span>
+        <span class="list-item__title">Date</span>
+        <span for= "check-1"class="list-item__subtitle">Name</span>
+      </div>
+      <div class= "right">
+          <ons-checkbox input-id="check-1"></ons-checkbox>
       </div>
     </ons-list-item>
+    <ons-list-item tappable>
+      <div class="left">
+        <img class="list-item__thumbnail" src="img/logo.png">
+      </div>
+      <div class="center">
+        <span class="list-item__title">Date</span>
+        <span for= "check-2"class="list-item__subtitle">Name</span>
+      </div>
+      <div class= "right">
+          <ons-checkbox input-id="check-2"></ons-checkbox>
+      </div>
+    </ons-list-item>
+     
+  
+    <ons-list-item tappable>
+        <div class="left">
+          <img class="list-item__thumbnail" src="img/logo.png">
+        </div>
+        <div class="center">
+          <span class="list-item__title">Date</span>
+          <span for= "check-3"class="list-item__subtitle">Name</span>
+        </div>
+        <div class= "right">
+            <ons-checkbox input-id="check-3"></ons-checkbox>
+        </div>
+      </ons-list-item>
                 </ons-page>
               </template>
     
