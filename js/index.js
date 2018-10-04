@@ -16,23 +16,70 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var firebase;
+
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+
     },
 
     // deviceready Event Handler
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
+    onDeviceReady: function () {
         this.receivedEvent('deviceready');
+
+        document.getElementById("button1").addEventListener("click", function () {
+            takePicture();
+        });
+
+        document.getElementById("umbenennen").addEventListener("click", function () {
+            ons.notification.prompt('Geben Sie den Namen der Datei an:')
+            .then(function (input) {
+                var message = input ? 'Entered: ' + input : 'Entered nothing!';
+                ons.notification.alert(message);
+            });
+        });
+
+        document.getElementById("loeschen").addEventListener("click", function () {
+            ons.notification.prompt('Geben Sie den Namen der Datei an:')
+            .then(function (input) {
+                var message = input ? 'Entered: ' + input : 'Entered nothing!';
+                ons.notification.alert(message);
+            });
+        });
+
+        window.localStorage.setItem("id", "666");
+        var value = window.localStorage.getItem("id");
+        console.log(value);
+        localStorage.clear;
+        window.localStorage.setItem("id", "420");
+        var value = window.localStorage.getItem("id");
+        console.log(value);
+        window.localStorage.removeItem("id", "420");
+
+
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCQCKqVSKAeOgvDz-zQNiLQEhQCY1YDhbM",
+            authDomain: "camera2-21e00.firebaseapp.com",
+            databaseURL: "https://camera2-21e00.firebaseio.com",
+            projectId: "camera2-21e00",
+            storageBucket: "camera2-21e00.appspot.com",
+            messagingSenderId: "359640106474"
+        };
+
+        firebase.initializeApp(config);
+
+        console.log(firebase);
 
     },
 
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         /*
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
@@ -43,55 +90,60 @@ var app = {
 
         console.log('Received Event: ' + id);
         console.log('Test');*/
-        
-        document.getElementById('button1').addEventListener('click',function(){
-            //
-            
-            
 
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 25,
-                destinationType: Camera.DestinationType.DATA_URL
-            });
-            
-            function onSuccess(imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
-                // Speichern hier
-            }
-            
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
 
-            
-            
-        });
-        
     }
 
-    
-};
 
+};
 
 app.initialize();
 
-/*
-var firebase = require("firebase");
-var config = {
-    apiKey: "AIzaSyCQCKqVSKAeOgvDz-zQNiLQEhQCY1YDhbM",
-    authDomain: "camera2-21e00.firebaseapp.com",
-    databaseURL: "https://camera2-21e00.firebaseio.com",
-    projectId: "camera2-21e00",
-    storageBucket: "camera2-21e00.appspot.com",
-    messagingSenderId: "359640106474"
-  };
-  firebase.initializeApp(config);
-*/
 
-var showPrompt = function() {
-    ons.notification.prompt('Geben Sie den Namen der Datei an:')
-      .then(function(input) {
-        var message = input ? 'Entered: ' + input : 'Entered nothing!';
-        ons.notification.alert(message);
-      });
-  };
+function takePicture() {
+
+    // take picture
+    navigator.camera.getPicture(onSuccess, onFail, {
+        quality: 25,
+        destinationType: Camera.DestinationType.DATA_URL
+    });
+
+    function onSuccess(imageData) {
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+        // create root reference
+        var name = "name";
+        var storageRef = firebase.storage().ref('img/');
+        var timestamp = Math.round(+new Date() / 1000);
+        var picture = storageRef.child(name + timestamp + '.jpg');
+        // do upload
+        picture.putString(imageData, 'base64', { contentType: 'image/jpg' });
+        // wait until data is written
+        setTimeout(function () {
+            downloadLink(picture);
+        }, 500);
+    }
+
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+
+}
+
+function downloadLink(picture) {
+    picture.getDownloadURL().then(function (url) {
+        var image = document.getElementById(imageId);
+        image.src = String(url);
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+    //galerie buttons
+    function showPrompt() {
+        ons.notification.prompt('Geben Sie den Namen der Datei an:')
+            .then(function (input) {
+                var message = input ? 'Entered: ' + input : 'Entered nothing!';
+                ons.notification.alert(message);
+            });
+    }
+}
