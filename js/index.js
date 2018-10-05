@@ -40,17 +40,13 @@ var app = {
         document.getElementById("umbenennen").addEventListener("click", function () {
             ons.notification.prompt('Geben Sie den Namen der Datei an:')
                 .then(function (input) {
-                    var message = input ? 'Entered: ' + input : 'Entered nothing!';
+                    var message = input ? 'Neuer Name: ' + input : 'Entered nothing!';
                     ons.notification.alert(message);
                 });
         });
 
         document.getElementById("loeschen").addEventListener("click", function () {
-            ons.notification.prompt('Geben Sie den Namen der Datei an:')
-                .then(function (input) {
-                    var message = input ? 'Entered: ' + input : 'Entered nothing!';
-                    ons.notification.alert(message);
-                });
+            alert("Element gelöscht.");
         });
 
         document.getElementById("refresh").addEventListener("click", function () {
@@ -101,16 +97,17 @@ function takePicture() {
         var image = document.getElementById('myImage');
         image.src = "data:image/jpeg;base64," + imageData;
         // create root reference
-        var name = "name";
+        var name = "test";
         var storageRef = firebase.storage().ref('img/');
         var timestamp = Math.round(+new Date() / 1000);
-        var picture = storageRef.child(name + timestamp + '.jpg');
+        //eigentlich sollte hier für weitere verwendung name + datum zusammen als name verwendet werden. Wegen anderen problemen können wir bis jetzt aber nur den namen "test" zum testen benutzen
+        var picture = storageRef.child(name /*+ timestamp*/ + '.jpg');
         // do upload
         picture.putString(imageData, 'base64', { contentType: 'image/jpg' });
         // wait until data is written
         setTimeout(function () {
             downloadLink(picture);
-        }, 500);
+        }, 1000);
     }
 
     function onFail(message) {
