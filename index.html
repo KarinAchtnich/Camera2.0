@@ -36,14 +36,16 @@
     font-src * 'unsafe-inline';
     script-src * 'unsafe-inline';
     media-src * blob:;
-    img-src * data:;">
+    img-src * data:;
+    frame-src * ;
+    connect-src * ;">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
   <link rel="stylesheet" type="text/css" href="css/index.css">
 
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
 
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
@@ -61,7 +63,7 @@
     </ons-toolbar>
 
     <ons-tabbar swipeable position="auto">
-      <ons-tab page="tab1.html" label="Kamera" badge="7" active>
+      <ons-tab page="tab1.html" label="Kamera" active>
       </ons-tab>
       <ons-tab page="tab2.html" label="Galerie" active-icon="md-face">
       </ons-tab>
@@ -76,7 +78,7 @@
 
       <div class="wrapper">
         <ons-button id="button1" ripple="true">Foto machen</ons-button>
-        <img id='myImage' src='img/logo.jpg'>
+        <!--<img id='myImage' src='img/logo.jpg'>-->
       </div>
 
     </ons-page>
@@ -86,6 +88,7 @@
   <template id="tab2.html">
     <ons-page id="Tab2">
       <p style="text-align: right;">
+        <ons-button id="refresh">refresh</ons-button>
         <ons-button id="umbenennen">umbenennen</ons-button>
         <ons-button id="loeschen">löschen</ons-button>
       </p>
@@ -96,22 +99,18 @@
           <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
         </div>
         <div class="center">
-          Name/Datum
+          Nach Name/Datum sortieren
         </div>
         <div class="right">
-          <ons-switch></ons-switch>
+          <ons-button id="switch">Switch</ons-button>
         </div>
 
-        <script>
-          array.forEach(element => {
-            
-          });
-          </script>
+      
       </ons-list-item>
       <ons-list-header>Bilder</ons-list-header>
       <ons-list-item tappable>
         <div class="left">
-          <img class="list-item__thumbnail" src="img/logo.png">
+          <img class="list-item__thumbnail" id="testThumb" src="img/testThumb.jpg">
         </div>
         <div class="center">
           <span class="list-item__title">Date</span>
@@ -119,32 +118,6 @@
         </div>
         <div class="right">
           <ons-checkbox input-id="check-1"></ons-checkbox>
-        </div>
-      </ons-list-item>
-      <ons-list-item tappable>
-        <div class="left">
-          <img class="list-item__thumbnail" src="img/logo.png">
-        </div>
-        <div class="center">
-          <span class="list-item__title">Date</span>
-          <span for="check-2" class="list-item__subtitle">Name</span>
-        </div>
-        <div class="right">
-          <ons-checkbox input-id="check-2"></ons-checkbox>
-        </div>
-      </ons-list-item>
-
-
-      <ons-list-item tappable>
-        <div class="left">
-          <img class="list-item__thumbnail" src="img/logo.png">
-        </div>
-        <div class="center">
-          <span class="list-item__title">Date</span>
-          <span for="check-3" class="list-item__subtitle">Name</span>
-        </div>
-        <div class="right">
-          <ons-checkbox input-id="check-3"></ons-checkbox>
         </div>
       </ons-list-item>
     </ons-page>
