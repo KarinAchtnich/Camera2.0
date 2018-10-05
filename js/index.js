@@ -29,6 +29,7 @@ var app = {
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
+
     onDeviceReady: function () {
         this.receivedEvent('deviceready');
 
@@ -38,28 +39,27 @@ var app = {
 
         document.getElementById("umbenennen").addEventListener("click", function () {
             ons.notification.prompt('Geben Sie den Namen der Datei an:')
-            .then(function (input) {
-                var message = input ? 'Entered: ' + input : 'Entered nothing!';
-                ons.notification.alert(message);
-            });
+                .then(function (input) {
+                    var message = input ? 'Entered: ' + input : 'Entered nothing!';
+                    ons.notification.alert(message);
+                });
         });
 
         document.getElementById("loeschen").addEventListener("click", function () {
             ons.notification.prompt('Geben Sie den Namen der Datei an:')
-            .then(function (input) {
-                var message = input ? 'Entered: ' + input : 'Entered nothing!';
-                ons.notification.alert(message);
-            });
+                .then(function (input) {
+                    var message = input ? 'Entered: ' + input : 'Entered nothing!';
+                    ons.notification.alert(message);
+                });
         });
 
-        window.localStorage.setItem("id", "666");
-        var value = window.localStorage.getItem("id");
-        console.log(value);
-        localStorage.clear;
-        window.localStorage.setItem("id", "420");
-        var value = window.localStorage.getItem("id");
-        console.log(value);
-        window.localStorage.removeItem("id", "420");
+        document.getElementById("refresh").addEventListener("click", function () {
+            downloadLink('img/test.jpg');
+        });
+
+        document.getElementById("switch").addEventListener("click", function () {
+            alert("Funktion nicht verfügbar.");
+        });
 
 
         // Initialize Firebase
@@ -80,17 +80,6 @@ var app = {
 
     // Update DOM on a Received Event
     receivedEvent: function (id) {
-        /*
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-        console.log('Test');*/
-
 
     }
 
@@ -130,20 +119,22 @@ function takePicture() {
 
 }
 
+//galerie buttons
+function showPrompt() {
+    ons.notification.prompt('Geben Sie den Namen der Datei an:')
+        .then(function (input) {
+            var message = input ? 'Entered: ' + input : 'Entered nothing!';
+            ons.notification.alert(message);
+        });
+}
+
 function downloadLink(picture) {
-    picture.getDownloadURL().then(function (url) {
-        var image = document.getElementById(imageId);
+    var storage = firebase.storage();
+    var pathReference = storage.ref();
+    pathReference.child(picture).getDownloadURL().then(function (url) {
+        var image = document.getElementById('testThumb');
         image.src = String(url);
     }).catch(function (error) {
         console.log(error);
     });
-
-    //galerie buttons
-    function showPrompt() {
-        ons.notification.prompt('Geben Sie den Namen der Datei an:')
-            .then(function (input) {
-                var message = input ? 'Entered: ' + input : 'Entered nothing!';
-                ons.notification.alert(message);
-            });
-    }
 }
